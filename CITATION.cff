@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use oss-publish in research or software, please cite it as below."
+title: "oss-publish"
+type: software
+authors:
+  - family-names: Dziatkovskii
+    given-names: Anton
+    orcid: "https://orcid.org/0000-0001-7408-3054"
+    affiliation: "Palo Alto AI Research Lab"
+repository-code: "https://github.com/tonydzi/oss-publish"
+url: "https://github.com/tonydzi/oss-publish"
+license: MIT
+abstract: >-
+  A publishing pipeline for opening internal work without leaking it. Personal data is
+  replaced by plausible fakes of the same shape rather than blacked out, so the documents
+  and code still work; substitution is sha256-deterministic, making re-publication a no-op
+  instead of a diff full of churn. A fail-closed gate then re-scans the entire tree before
+  the push, not only the changed files, on the measured grounds that already published is
+  not a synonym for already checked. Files whose point is third-party personal data cannot
+  be saved by substitution and are denied by name and by shape rule. Stdlib-only Python, no
+  network, no telemetry.
+keywords:
+  - open-source
+  - data-sanitization
+  - privacy
+  - anonymization
+  - ci-gate
+  - publishing
