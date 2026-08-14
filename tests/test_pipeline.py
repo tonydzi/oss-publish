@@ -41,6 +41,23 @@ def clean(text, code=False, rules=None):
 
 class TestSubstitution(unittest.TestCase):
 
+    def test_script_follows_script(self):
+        """A Cyrillic name gets a Cyrillic fake, a Latin name a Latin one - the contract
+        stated in `fake_person`'s docstring, which nothing else pinned.
+
+        Guarding against a *translation* pass, not a logic bug: the Cyrillic here reads like
+        leftover localisation, so an i18n sweep transliterates the `ru_*` pools or widens the
+        `[А-Яа-яЁё]` probe to `[A-Za-z]` and the whole suite still passes green. The result is
+        `Антон -> Alex Ozturk` and `Dave Olsen -> Timur Morozova`: every substituted name
+        visibly machine-mangled, which is the exact failure the docstring warns about."""
+        r = load()
+        cyr = san.fake_person(r, "Антон", full=True)
+        lat = san.fake_person(r, "Dave Olsen", full=True)
+        self.assertTrue(re.search(r"[А-Яа-яЁё]", cyr),
+                        "a Cyrillic name must get a Cyrillic fake, got %r" % cyr)
+        self.assertFalse(re.search(r"[А-Яа-яЁё]", lat),
+                         "a Latin name must get a Latin fake, got %r" % lat)
+
     def test_substitution_replaces_the_person_and_spares_the_word(self):
         """`Кирилл` is a name; `кириллица` is the Cyrillic alphabet. The person goes, the
         alphabet stays.
