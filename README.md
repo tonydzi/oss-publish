@@ -6,7 +6,7 @@ This is the pipeline we run before every public release: it **replaces** persona
 plausible fakes of the same shape — it does not black it out — and then a fail-closed gate
 re-scans the **entire** repo before the push.
 
-Built and used daily at [Palo Alto AI Research Lab](https://github.com/tonydzi/Palo-Alto-AI-Research-Lab).
+Built and used daily at [Palo Alto AI Research Lab](https://github.com/tonydzi/tonydzi).
 Every kit we ship went through exactly this: 101 skills, 246 engines, one gate.
 
 Python 3, standard library only. No dependencies, no network, no telemetry.
